@@ -1,0 +1,4 @@
+192.168.56.104 ansible_python_interpreter=/usr/bin/python3 pip_package=pip3
+
+#CentOS IP Address
+192.168.56.107 ansible_python_interpreter=/usr/bin/python3 pip_package=pip3 

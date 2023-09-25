@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  
+  vars: 
+    motd: 
+      - Ansible managed node by rose
+
+   - name: Message of the day
+     ansible.builtin.debug:
+       msg:
+         - "{{ motd }}" 
+
+   - name: install and update python3 and pip3
+     package:
+       name:
+         - python3
+         - python-pip
+       state: latest
+       update_cache: yes
+   
+   - name: installing java open-jdk for Ubuntu 
+     apt:
+       name:
+         - openjdk-17-jre
+       state: latest
+       update_cache: yes
+     when: ansible_distribution == "Ubuntu"
+
+   - name: installing java open-jdk for CentOS
+     yum:
+       name:
+         - java-11-openjdk 
+       state: latest
+       update_cache: yes
+     when: ansible_distribution == "CentOS"
+
+       
+       
+
