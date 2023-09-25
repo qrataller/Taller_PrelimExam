@@ -1,16 +1,27 @@
+
 ---
 - hosts: all
   become: true
-  tasks:
-  
+
   vars: 
     motd: 
       - Ansible managed node by rose
+    username:
+      - rose12345   
 
+  tasks:
    - name: Message of the day
      ansible.builtin.debug:
        msg:
-         - "{{ motd }}" 
+         - "{{ motd }}"
+ 
+   - name: Creating a new user
+     ansible.builtin.user:
+        name: "{{ username }}"
+        uid: 090402
+        createhome: yes
+        home: /home/"{{ username }}"
+        shell: /bin/bash
 
    - name: install and update python3 and pip3
      package:
